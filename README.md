@@ -1,4 +1,5 @@
-EXP6 : Traffic Light Controller -Synthesize the Gate Level Netlist and tabulate Area and Power reports
+# EXP6 : Traffic Light Controller -Synthesize the Gate Level Netlist and tabulate Area and Power reports
+
 ## Aim:
 
 Synthesize Traffic Light Controller design using Constraints and analyse area and Power reports.
@@ -17,10 +18,12 @@ Synthesis requires three files as follows,
 
 ◦ Verilog/VHDL Files (.v or .vhdl or .vhd)
 
-### Step 2 : Creating an SDC File
+### Step 2 : Creating an SDC, .V, Run.tcl File
 
 •	In your terminal type “gedit input_constraints.sdc” to create an SDC File if you do not have one.
-* The SDC File must contain the following commands:
+
+•	The SDC File must contain the following commands:
+
 ```
 create_clock -name clk -period 2 -waveform {0 1} [get_ports "clk"]
 set_clock_transition -rise 0.1 [get_clocks "clk"]
@@ -30,8 +33,10 @@ set_input_delay -max 0.8 [get_ports "rst"] -clock [get_clocks "clk"]
 set_output_delay -max 0.8 [get_ports "LED_NS"] -clock [get_clocks "clk"]
 set_output_delay -max 0.8 [get_ports "LED_WE"] -clock [get_clocks "clk"]
 ```
-* The .V File must contain the following commands:
-```read_libs /cadence/install/FOUNDRY-01/digital/90nm/dig/lib/slow.lib
+•	The Run.tcl File must contain the following commands:
+
+```
+read_libs /cadence/install/FOUNDRY-01/digital/90nm/dig/lib/slow.lib
 read_hdl traffic.v
 elaborate
 syn_generic
@@ -45,8 +50,11 @@ report_power > traffic_power.txt
 write_hdl > alu_32bit_netlist.v
 gui_show
 ```
-*The .V File must contain the following commands:
-````timescale 1 ns / 1 ps
+
+•	The .V File must contain the following commands:
+
+```
+`timescale 1 ns / 1 ps
 module TrafficLight(input clk, //LED_NS represent the North-South LEDs
 		    input rst, //LED_WE represent the West-East LEDs
 		    output reg [2:0] LED_NS, LED_WE);
@@ -134,6 +142,7 @@ end
 
 endmodule
 ```
+
 ### Step 3 : Performing Synthesis
 
 The Liberty files are present in the library path,
@@ -151,14 +160,13 @@ The Liberty files are present in the library path,
 • Genus Script file with .tcl file Extension commands are executed one by one to synthesize the netlist.
 
 Synthesis RTL Schematic :
-![image]_(https://github.com/user-attachments/assets/98dddb2e-b099-453e-af32-6eb30e8423fe)
+![image](https://github.com/user-attachments/assets/73e95a03-4908-4e96-86c9-d03fd7d34fef)
 
 Area report:
-![image](https://github.com/user-attachments/assets/be58d6c5-3dda-4252-bf6d-3b3116509952)
+![image](https://github.com/user-attachments/assets/963b6855-60cd-489b-b680-8fcbe6b4eb0a)
 
 Power Report:
-
-![image](https://github.com/user-attachments/assets/1389b174-9107-4708-9451-78a1a8a4b14a)
+![image](https://github.com/user-attachments/assets/a121d754-4022-4520-8c0f-b7dcd1baed8a)
 
 Result:
 The generic netlist of Traffic Light Controller has been created, and area, power reports have been tabulated and generated using Genus.
