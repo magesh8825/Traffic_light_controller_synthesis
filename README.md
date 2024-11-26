@@ -21,8 +21,8 @@ Synthesis requires three files as follows,
 
 •	In your terminal type “gedit input_constraints.sdc” to create an SDC File if you do not have one.
 * The SDC File must contain the following commands:
-  ```
-  create_clock -name clk -period 2 -waveform {0 1} [get_ports "clk"]
+```
+create_clock -name clk -period 2 -waveform {0 1} [get_ports "clk"]
 set_clock_transition -rise 0.1 [get_clocks "clk"]
 set_clock_transition -fall 0.1 [get_clocks "clk"]
 set_clock_uncertainty 0.01 [get_ports "clk"]
@@ -151,7 +151,7 @@ The Liberty files are present in the library path,
 • Genus Script file with .tcl file Extension commands are executed one by one to synthesize the netlist.
 
 Synthesis RTL Schematic :
-![image](https://github.com/user-attachments/assets/95b1fc0b-70ea-47df-9de5-2436332b3326)
+![6 3](https://github.com/user-attachments/assets/6ddf54bb-b48b-4228-91e7-e4cd9c11dbb0)
 
 Area report:
 ![image](https://github.com/user-attachments/assets/56bee965-fe60-45db-9e16-acc42ebf2c8d)
